@@ -1,0 +1,22 @@
+openapi: '3.0.3'
+info:
+  version: '0.0.1'
+  title: 'API Catalog Specification'
+  description: API Catalog
+  contact:
+    email: test@test.com
+servers:
+  - url: https://localhost/api/v1
+tags:
+  - name: api
+    description: Everything about your API(s)
+    externalDocs:
+      description: Find out more
+      url: http://dc.io
+paths:
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
