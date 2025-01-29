@@ -1,0 +1,99 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '3.4.2'
+    id 'io.spring.dependency-management' version '1.1.6'
+    //id 'org.graalvm.buildtools.native' version '0.10.0'
+    id 'com.google.cloud.tools.jib' version '3.4.4'
+    // id 'org.liquibase.gradle' version '2.2.0'
+}
+
+group 'com.sab.api.catalog'
+version '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+}
+
+springBoot {
+    buildInfo()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://repo.spring.io/release"
+    }
+    maven {
+        url "https://repository.jboss.org/maven2"
+    }
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
+/*liquibase {
+    activities {
+        main {
+            defaultsFile "src/main/resources/liquibase.properties"
+        }
+    }
+    runList = "main"
+}*/
+
+dependencyManagement {
+    imports {
+        mavenBom("io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom:2.11.0")
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.session:spring-session-core'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+
+    implementation 'org.springframework.boot:spring-boot-starter-graphql'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'
+
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+    // Dependencies required for running liquibase for tests
+    // liquibaseRuntime 'org.liquibase:liquibase-core:4.30.0'
+    // liquibaseRuntime 'info.picocli:picocli:4.7.5'
+    // liquibaseRuntime 'org.postgresql:postgresql'
+
+    // monitoring & tracing
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    // TODO trace id in logging is not coming with open telemetry starter, need to check
+    implementation 'io.opentelemetry.instrumentation:opentelemetry-spring-boot-starter'
+    // https://opentelemetry.io/blog/2024/spring-starter-stable/
+    // https://spring.io/blog/2024/10/28/lets-use-opentelemetry-with-spring
+
+    implementation 'io.micrometer:micrometer-registry-otlp'
+
+    // implementation 'io.micrometer:micrometer-tracing'
+    // implementation 'io.micrometer:micrometer-tracing-bridge-otel'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.graphql:spring-graphql-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.11.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.11.4'
+}
