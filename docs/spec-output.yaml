@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  version: 0.0.1
+  title: API Catalog Specification
+  description: API Catalog
+  contact:
+    email: test@test.com
+servers:
+  - url: https://localhost/api/v1
+tags:
+  - name: Database
+    description: Everything about your API(s)
+    externalDocs:
+      description: Find out more
+      url: http://dc.io
+paths:
+  /collections:
+    get:
+      tags:
+        - API Collection
+      summary: Get API Collections
+      description: Get API Collections
+      operationId: getApiCollections
+      responses:
+        "200":
+          description: Get API Collections
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APICollection"
+        "404":
+          description: No API Collections found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /endpoints:
+    get:
+      tags:
+        - API Endpoint
+      summary: Get API Endpoints
+      description: Get API Endpoints
+      operationId: getApiEndpoints
+      responses:
+        "200":
+          description: Get API Endpoints
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIEndpoint"
+        "404":
+          description: No API Endpoints found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /services:
+    get:
+      tags:
+        - API Service
+      summary: Get API Services
+      description: Get API Services
+      operationId: getApiServices
+      responses:
+        "200":
+          description: Get API Services
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIService"
+        "404":
+          description: No API Services found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    APICollection:
+      type: object
+      required:
+        - href
+        - items
+      properties:
+        href:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/APIEndpoint"
+    APIEndpoint:
+      type: object
+      properties:
+        apiCollection:
+          $ref: "#/components/schemas/APICollection"
+        auditLifeCycle:
+          $ref: "#/components/schemas/LifeCycle"
+        displayName:
+          type: string
+        description:
+          type: string
+        endpointURL:
+          type: string
+          format: uri
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        requestMethod:
+          type: string
+        requestSchema:
+          type: string
+        responseSchema:
+          type: string
+        owner:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: "#/components/schemas/Tag"
+    APIService:
+      type: object
+      properties:
+        description:
+          type: string
+        collection:
+          $ref: "#/components/schemas/APICollection"
+        href:
+          type: string
+          format: uri
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        owner:
+          $ref: "#/components/schemas/Entity"
+    AuditDetail:
+      type: object
+      required:
+        - timestamp
+      properties:
+        process:
+          type: string
+        user:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+    Entity:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        deleted:
+          type: boolean
+        description:
+          type: string
+        href:
+          type: string
+          format: uri
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type: string
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: A human readable error message
+          type: string
+    LifeCycle:
+      type: object
+      properties:
+        accessed:
+          $ref: "#/components/schemas/AuditDetail"
+        created:
+          $ref: "#/components/schemas/AuditDetail"
+        updated:
+          $ref: "#/components/schemas/AuditDetail"
+    Tag:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        description:
+          type: string
+        href:
+          type: string
+          format: uri
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string

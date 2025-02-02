@@ -1,6 +1,6 @@
 # Combine API Spec files
 
-speccy resolve /Users/satish/mine/prj/catalog/apicatalog/docs/openapi/catalog-api.yaml -o /Users/satish/mine/prj/catalog/apicatalog/docs/openapi/spec-output.yaml
+speccy resolve ./catalog-api.yaml -o ./spec-output.yaml
 
 ## Reference
 
