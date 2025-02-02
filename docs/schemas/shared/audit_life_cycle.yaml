@@ -1,0 +1,8 @@
+type: object
+properties:
+  accessed:
+    $ref: "./audit_detail.yaml"
+  created:
+    $ref: "./audit_detail.yaml"
+  updated:
+    $ref: "./audit_detail.yaml"

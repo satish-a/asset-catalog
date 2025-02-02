@@ -1,0 +1,25 @@
+get:
+  tags:
+    - API Service
+  summary: Get API Services
+  description: "Get API Services"
+  operationId: getApiServices
+  responses:
+    "200":
+      description: Get API Services
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/services/api/api_service.yaml"
+    "404":
+      description: No API Services found
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/shared/error.yaml"
+    "500":
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/shared/error.yaml"

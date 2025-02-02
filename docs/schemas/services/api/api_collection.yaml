@@ -1,0 +1,13 @@
+type:
+  object
+required:
+  - 'href'
+  - 'items'
+properties:
+  href:
+    type: string
+    format: uri
+  items:
+    type: array
+    items:
+      $ref: './api_endpoint.yaml'

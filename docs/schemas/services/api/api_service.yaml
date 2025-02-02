@@ -1,0 +1,17 @@
+type:
+  object
+properties:
+  description:
+    type: string
+  collection:
+    $ref: './api_collection.yaml'
+  href:
+    type: string
+    format: uri
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+  owner:
+    $ref: '../../shared/entity.yaml'

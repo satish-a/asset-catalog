@@ -1,0 +1,25 @@
+get:
+  tags:
+    - API Endpoint
+  summary: Get API Endpoints
+  description: "Get API Endpoints"
+  operationId: getApiEndpoints
+  responses:
+    "200":
+      description: Get API Endpoints
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/services/api/api_endpoint.yaml"
+    "404":
+      description: No API Endpoints found
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/shared/error.yaml"
+    "500":
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/shared/error.yaml"

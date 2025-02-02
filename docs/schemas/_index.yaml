@@ -1,0 +1,16 @@
+APICollection:
+    $ref: './services/api/api_collection.yaml'
+APIEndpoint:
+    $ref: './services/api/api_endpoint.yaml'
+APIService:
+    $ref: './services/api/api_service.yaml'
+AuditDetail:
+  $ref: './shared/audit_detail.yaml'
+Entity:
+  $ref: './shared/entity.yaml'
+Error:
+  $ref: './shared/error.yaml'
+LifeCycle:
+  $ref: './shared/audit_life_cycle.yaml'
+Tag:
+  $ref: './shared/tag.yaml'

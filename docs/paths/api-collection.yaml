@@ -1,0 +1,25 @@
+get:
+  tags:
+    - API Collection
+  summary: Get API Collections
+  description: "Get API Collections"
+  operationId: getApiCollections
+  responses:
+    "200":
+      description: Get API Collections
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/services/api/api_collection.yaml"
+    "404":
+      description: No API Collections found
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/shared/error.yaml"
+    "500":
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/shared/error.yaml"

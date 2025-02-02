@@ -8,15 +8,18 @@ info:
 servers:
   - url: https://localhost/api/v1
 tags:
-  - name: api
+  - name: Database
     description: Everything about your API(s)
     externalDocs:
       description: Find out more
       url: http://dc.io
 paths:
+  /collections:
+    $ref: './paths/api-collection.yaml'
+  /endpoints:
+    $ref: './paths/api-endpoint.yaml'
+  /services:
+    $ref: './paths/api-service.yaml'
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+  schemas:
+    $ref: "./schemas/_index.yaml"

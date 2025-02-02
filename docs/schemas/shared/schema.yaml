@@ -1,0 +1,68 @@
+type:
+  object
+definitions:
+  entityName:
+    type: string
+    description: Entity name
+    minLength: 1
+    maxLength: 256
+    pattern: '^[a-zA-Z0-9_]+$'
+  entityLink:
+    type: string
+    description: Entity link
+    format: uri
+  fullyQualifiedName:
+    type: string
+    description: Fully qualified name
+    minLength: 1
+    maxLength: 2048
+  status:
+    type: string
+    description: Status
+    enum:
+      - Active
+      - Inactive
+      - Deleted
+  fieldName:
+    type: string
+    description: Field name
+    minLength: 1
+    maxLength: 128
+  field:
+    type: object
+    description: Field
+    properties:
+      name:
+        $ref: '#/definitions/fieldName'
+      displayName:
+        type: string
+        description: Display name
+      description:
+        type: string
+        description: Description
+        minLength: 1
+        maxLength: 2048
+
+  email:
+    type: string
+    description: Email address
+    format: email
+    minLength: 6
+    maxLength: 256
+  href:
+    type: string
+    description: URI
+    format: uri
+  timeInterval:
+    type: object
+    description: Time interval in TimeMillis
+    properties:
+      start:
+        type: integer
+        description: Start time in TimeMillis
+      end:
+        type: integer
+        description: End time in TimeMillis
+  duration:
+    type: string
+    description: Duration in ISO 8601 format in UTC

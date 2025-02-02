@@ -1,0 +1,31 @@
+type:
+  object
+properties:
+  apiCollection:
+    $ref: './api_collection.yaml'
+  auditLifeCycle:
+    $ref: '../../shared/audit_life_cycle.yaml'
+  displayName:
+    type: string
+  description:
+    type: string
+  endpointURL:
+    type: string
+    format: uri
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+  requestMethod:
+    type: string
+  requestSchema:
+    type: string
+  responseSchema:
+    type: string
+  owner:
+    type: string
+  tags:
+    type: array
+    items:
+      $ref: '../../shared/tag.yaml'

@@ -1,0 +1,11 @@
+type: object
+required:
+  - "timestamp"
+properties:
+  process:
+    type: string
+  user:
+    type: string
+  timestamp:
+    type: integer
+    format: int64
